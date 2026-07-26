@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
-
+import { GreetingCard } from "@/presentation/components/dashboard/greeting-card";
+import { TopPrioritiesCard } from "@/presentation/components/dashboard/top-priorities-card";
 import { ThemedView } from "@/components/themed-view";
 import {
   BottomTabInset,
   MaxContentWidth,
   Spacing,
 } from "@/presentation/theme/theme";
-import { GreetingCard } from "@/presentation/components/dashboard/greeting-card";
 
 export function DashboardScreen() {
   return (
@@ -16,6 +16,7 @@ export function DashboardScreen() {
       <SafeAreaView style={styles.safeArea}>
         <GreetingCard />
         <CurrentFocusCard />
+        <TopPrioritiesCard />
       </SafeAreaView>
     </ThemedView>
   );
