@@ -5,6 +5,7 @@ import { ThemedView } from "@/components/themed-view";
 import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
 import { GreetingCard } from "@/presentation/components/dashboard/greeting-card";
 import { TopPrioritiesCard } from "@/presentation/components/dashboard/top-priorities-card";
+import { TimelineCard } from "@/presentation/components/dashboard/timeline-card";
 import {
   BottomTabInset,
   MaxContentWidth,
@@ -19,6 +20,7 @@ export function DashboardScreen() {
           <GreetingCard />
           <CurrentFocusCard />
           <TopPrioritiesCard />
+          <TimelineCard />
         </ScrollView>
       </SafeAreaView>
     </ThemedView>
