@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
 
 import { ThemedView } from "@/components/themed-view";
 import {
@@ -14,6 +15,7 @@ export function DashboardScreen() {
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <GreetingCard />
+        <CurrentFocusCard />
       </SafeAreaView>
     </ThemedView>
   );
