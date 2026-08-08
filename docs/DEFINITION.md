@@ -1,131 +1,98 @@
-Quem são as entidades do domínio?
+# Daily OS — Definition
 
-    nao entendi a pergunta mas o dominio pode ser global como a app momentum e a aoo ADD to cart que acaba com .app
+Daily OS is a personal operating system for planning, regulation and execution.
 
-Como funciona o algoritmo de planeamento?
+Its purpose is not to maximize daily productivity.
 
-    O algoritmo de planeamento ira funcionar certinho como esta folha , sera para me fazer o plano do dia de forma realista e me ajudar a planear o dia....
+Its purpose is to help me make better decisions according to:
 
-# ⚙️ DAILY_OS_CONTRACT.md
+- my priorities;
+- available time;
+- current energy;
+- focus;
+- impulsivity;
+- physical/mental constraints;
+- recent execution history;
+- need for recovery.
 
-## Purpose
+Daily OS converts my current state and responsibilities into a realistic daily plan.
 
-Daily OS is my personal operating system for planning and executing each
-day.
+It also records daily self-observations so that, over time, it can detect patterns
+between my state, my plans and what I actually execute.
 
-The planning rules below are **permanent**. The only thing that changes
-each day is the daily input.
+## Core loop
 
-------------------------------------------------------------------------
+OBSERVE → PLAN → EXECUTE → REVIEW → LEARN
 
-# Objective
+### OBSERVE
+Collect the minimum information required to understand today's state.
 
-Organize my day according to my priorities, available time and current
-energy.
+### PLAN
+Build a realistic plan according to fixed priorities, time, energy and constraints.
 
-**Consistency is always more important than intensity.**
+### EXECUTE
+Use small, concrete time blocks and protect recovery.
 
-------------------------------------------------------------------------
+### REVIEW
+Record what actually happened.
 
-# Fixed Priorities
+### LEARN
+Compare planned vs completed work and identify recurring patterns that may improve
+future planning.
 
-1.  Work
-2.  Studies
-3.  Recovery / Leisure
+## Fixed priorities
 
-------------------------------------------------------------------------
+1. Work
+2. Studies
+3. Recovery / Leisure
 
-# Planning Rules
+Consistency is more important than intensity.
 
-Before accepting any task:
+## Daily state
 
--   Validate available time.
--   Validate current energy.
--   Estimate the energy cost of every task.
--   Protect sleep and recovery.
--   Never overload the day.
--   Keep 20--30% of the day free for unexpected events.
--   If there is doubt, reduce workload instead of increasing it.
--   Prefer postponing tasks over sacrificing consistency.
+Before planning:
 
-------------------------------------------------------------------------
+- Energy: 0–10
+- Focus: 0–10
+- Impulsivity: 0–10
+- Available time
+- Constraints
+- Current commitments
 
-# Expected Output
+After the day:
 
-For every planning request:
+- Tasks planned
+- Tasks completed
+- Relevant notes
 
-1.  Order tasks by priority.
-2.  Detect overload.
-3.  Detect conflicts.
-4.  Postpone unnecessary work.
-5.  Build a realistic time-blocked schedule.
-6.  Explain the reasoning behind important decisions.
-7.  Leave recovery time.
-8.  Ask:
+## Important principle
 
-> **Do you like today's schedule or do you want any changes?**
+Daily OS does not diagnose my mental state.
 
-If I approve the schedule:
+It observes patterns in my self-reported state and behavior and uses those patterns
+to make future plans more realistic.
 
--   Create Google Calendar events.
--   Synchronize all blocks.
--   Keep breaks and recovery time.
+## Regulation rule
 
-------------------------------------------------------------------------
+When energy or impulsivity is unusually high:
 
-# Daily Input
+BODY → SMALL TASK → DECISION
 
-Every day I will only provide:
+Do not make major or irreversible decisions immediately.
 
-``` text
-Plan my day.
+Create latency between impulse and action.
 
-Tasks:
--
+## Output
 
-Energy:
-High / Medium / Low
+For every planning request Daily OS should:
 
-Available time:
-
-Current time (optional):
-
-Constraints (optional):
-
-Notes (optional):
-```
-
-------------------------------------------------------------------------
-
-# Final Rule
-
-If there is uncertainty:
-
--   Protect energy.
--   Protect consistency.
--   Protect long-term progress.
-
-Never optimize only today's productivity.
-
-# MANDATORY 
-Ask if the person like or not the schedule? If followed by an "YES" convert to an schedule in a google calendar in a way to synchronize all the events 
-
-
-
-Que dados entram?
-
-    entra estes dados todos que pus na outra pertgunta que esta como DAYLY_OSCONTRACT.md no meu rep[ositorio, vou tb adicionar aqui. 
-
-Que dados saem?
-    
-
-    google calendar blocks with the needed time for each task.
-
-Que regras nunca podem depender do React Native?
-
-    o niput e o output acho nem sei 
-
-Como dividir Domain, Application, Data e UI?
-
-    Nao sei tenho de aprender. 
-
+1. Rank tasks according to fixed priorities.
+2. Check available time.
+3. Check current energy and constraints.
+4. Detect overload and conflicts.
+5. Reduce or postpone work when necessary.
+6. Keep 20–30% buffer where possible.
+7. Create realistic time blocks.
+8. Preserve recovery.
+9. Explain important planning decisions.
+10. Ask for approval before synchronizing the plan.
