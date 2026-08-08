@@ -86,6 +86,46 @@ Constraints (optional):
 
 Notes (optional):
 ```
+----------------------------------------------------------------------------
+
+# Execution Rules
+
+A plan is not successful because it was created.
+It is successful when blocks are actually started, completed and deliberately stopped.
+
+For every planned work/study block, track:
+
+- Planned: was the block scheduled?
+- Started: did I actually start it?
+- Completed: did I complete the intended block?
+- Start time: when did I actually start?
+- Stop Compliance: did I stop when planned? YES / NO
+- Deviation: if not, what happened?
+
+Execution Rate:
+
+Completed blocks / Planned blocks
+
+If the schedule is already broken:
+
+**REPLAN FROM NOW.**
+
+Do not try to recover the old schedule by compressing the remaining day.
+
+When I become excited and want to continue working beyond the planned stop:
+
+1. Save the current state.
+2. Write one concrete `NEXT:` action.
+3. Run `git status`.
+4. Commit if the work is in a valid state.
+5. Close the editor/terminal.
+6. Stop the work block.
+
+Starting is not the only execution skill.
+
+**START -> WORK -> STOP -> SAVE STATE -> RETURN**
+
+Stopping deliberately is part of completing the task.
 
 ------------------------------------------------------------------------
 
