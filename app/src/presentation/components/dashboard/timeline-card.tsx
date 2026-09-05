@@ -4,7 +4,18 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/presentation/theme/theme";
 
-export function TimelineCard() {
+export type TimelineItem = {
+  id: string;
+  startTime: string;
+  endTime: string;
+  title: string;
+};
+
+type TimelineCardProps = {
+  items: TimelineItem[];
+};
+
+export function TimelineCard({ items }: TimelineCardProps) {
   return (
     <ThemedView type="backgroundElement" style={styles.container}>
       <ThemedText type="smallBold" themeColor="textSecondary">
@@ -12,9 +23,11 @@ export function TimelineCard() {
       </ThemedText>
 
       <View style={styles.list}>
-        <ThemedText>09:00 – 10:30 Daily OS</ThemedText>
-        <ThemedText>11:00 – 12:00 LeetCode</ThemedText>
-        <ThemedText>15:00 – 16:30 Engineering Lab</ThemedText>
+        {items.map((item) => (
+          <ThemedText key={item.id}>
+            {item.startTime} - {item.endTime} {item.title}
+          </ThemedText>
+        ))}
       </View>
     </ThemedView>
   );
