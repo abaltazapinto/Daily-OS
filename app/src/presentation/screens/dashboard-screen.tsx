@@ -12,6 +12,26 @@ import {
   Spacing,
 } from "@/presentation/theme/theme";
 
+const timelineItems = [
+  {
+    id: "daily-os",
+    startTime: "09:00",
+    endTime: "10.30",
+    title: "Daily OS",
+  },
+  {
+    id: "leetcode",
+    startTime: "10:30",
+    title: "LeetCode",
+  },
+  {
+    id: "engineering-lab",
+    startTime: "15:00",
+    endTime: "16:30",
+    title: "Engineering Lab",
+  },
+];
+
 export function DashboardScreen() {
   return (
     <ThemedView style={styles.container}>
@@ -20,7 +40,7 @@ export function DashboardScreen() {
           <GreetingCard />
           <CurrentFocusCard />
           <TopPrioritiesCard />
-          <TimelineCard />
+          <TimelineCard items={timelineItems} />
         </ScrollView>
       </SafeAreaView>
     </ThemedView>
