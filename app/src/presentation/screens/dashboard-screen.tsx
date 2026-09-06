@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedView } from "@/components/themed-view";
 import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
+import { DailyContextInputCard } from "@/presentation/components/dashboard/daily-context-input-card";
 import { GreetingCard } from "@/presentation/components/dashboard/greeting-card";
 import { TopPrioritiesCard } from "@/presentation/components/dashboard/top-priorities-card";
 import { TimelineCard } from "@/presentation/components/dashboard/timeline-card";
@@ -33,11 +35,22 @@ const timelineItems = [
 ];
 
 export function DashboardScreen() {
+  const [dailyContext, setDailyContext] = useState("");
+
+  function handlePlanMyDay() {
+    // Planning will be connected in a later issue.
+  }
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.content}>
           <GreetingCard />
+          <DailyContextInputCard
+            value={dailyContext}
+            onChangeText={setDailyContext}
+            onSubmit={handlePlanMyDay}
+          />
           <CurrentFocusCard />
           <TopPrioritiesCard />
           <TimelineCard items={timelineItems} />
