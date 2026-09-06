@@ -96,3 +96,45 @@ Daily OS is a personal operating system that continuously answers one question: 
 If every new feature strengthens that sentence, it belongs in the app.
 
 If it doesn't, it probably belongs somewhere else.
+
+## September 2026 — AI Planning Direction
+
+┌──────────────────────────────────────┐
+│ Good morning, André.                 │
+├──────────────────────────────────────┤
+│ O que tens para hoje?                │
+│                                      │
+│ Tenho fisioterapia às 15:00,         │
+│ quero fazer LeetCode, trabalhar      │
+│ 2h no Daily-OS e preciso de...       │
+│                                      │
+│                         [Plan my day] │
+└──────────────────────────────────────┘
+                  │
+                  ▼
+              AI service
+                  │
+                  ▼
+        resposta estruturada
+                  │
+        ┌─────────┴─────────┐
+        ▼                   ▼
+ Top Priorities          Timeline
+
+Conceptually:
+
+User input
+   ↓
+Daily-OS UI
+   ↓
+Planning service
+   ↓
+OpenAI API
+   ↓
+DailyPlan
+   ├── currentFocus
+   ├── priorities[]
+   ├── timeline[]
+   └── warnings[]
+   ↓
+Dashboard
