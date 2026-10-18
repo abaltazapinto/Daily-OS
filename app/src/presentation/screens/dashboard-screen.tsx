@@ -10,6 +10,7 @@ import { HttpDailyPlanner } from "@/services/planning/http-daily-planner";
 import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
 import { DailyContextInputCard } from "@/presentation/components/dashboard/daily-context-input-card";
 import { GreetingCard } from "@/presentation/components/dashboard/greeting-card";
+import { PlanningWarningsCard } from "@/presentation/components/dashboard/planning-warnings-card";
 import { TopPrioritiesCard } from "@/presentation/components/dashboard/top-priorities-card";
 import { TimelineCard } from "@/presentation/components/dashboard/timeline-card";
 import {
@@ -39,7 +40,7 @@ const timelineItems = [
 ];
 
 type PlanningState =
-  | { status: "idle" | "submitting" | "error" }
+  | { status: "idle" | "submitting" | "error"; plan?: DailyPlan }
   | { status: "success"; plan: DailyPlan };
 
 const dailyPlanner: DailyPlanner = new HttpDailyPlanner();
@@ -54,13 +55,13 @@ export function DashboardScreen() {
 
     const input: DailyPlanningInput = { context: dailyContext };
     submitting.current = true;
-    setPlanning({ status: "submitting" });
+    setPlanning((previous) => ({ status: "submitting", plan: previous.plan }));
 
     try {
       const plan = await dailyPlanner.plan(input);
       setPlanning({ status: "success", plan });
     } catch {
-      setPlanning({ status: "error" });
+      setPlanning((previous) => ({ status: "error", plan: previous.plan }));
     } finally {
       submitting.current = false;
     }
@@ -84,9 +85,12 @@ export function DashboardScreen() {
                   : undefined
             }
           />
-          <CurrentFocusCard />
-          <TopPrioritiesCard />
-          <TimelineCard items={timelineItems} />
+          <CurrentFocusCard focus={planning.plan?.currentFocus} />
+          <TopPrioritiesCard priorities={planning.plan?.priorities} />
+          <TimelineCard items={planning.plan?.timeline ?? timelineItems} />
+          {planning.plan && (
+            <PlanningWarningsCard warnings={planning.plan.warnings} />
+          )}
         </ScrollView>
       </SafeAreaView>
     </ThemedView>
