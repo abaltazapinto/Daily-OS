@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedView } from "@/components/themed-view";
+import type { DailyPlanner } from "@/application/planning/daily-planner";
+import type { DailyPlanningInput } from "@/application/planning/daily-planning-input";
+import type { DailyPlan } from "@/domain/planning/daily-plan";
+import { HttpDailyPlanner } from "@/services/planning/http-daily-planner";
 import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
 import { DailyContextInputCard } from "@/presentation/components/dashboard/daily-context-input-card";
 import { GreetingCard } from "@/presentation/components/dashboard/greeting-card";
@@ -34,11 +38,32 @@ const timelineItems = [
   },
 ];
 
+type PlanningState =
+  | { status: "idle" | "submitting" | "error" }
+  | { status: "success"; plan: DailyPlan };
+
+const dailyPlanner: DailyPlanner = new HttpDailyPlanner();
+
 export function DashboardScreen() {
   const [dailyContext, setDailyContext] = useState("");
+  const [planning, setPlanning] = useState<PlanningState>({ status: "idle" });
+  const submitting = useRef(false);
 
-  function handlePlanMyDay() {
-    // Planning will be connected in a later issue.
+  async function handlePlanMyDay() {
+    if (submitting.current || dailyContext.trim().length === 0) return;
+
+    const input: DailyPlanningInput = { context: dailyContext };
+    submitting.current = true;
+    setPlanning({ status: "submitting" });
+
+    try {
+      const plan = await dailyPlanner.plan(input);
+      setPlanning({ status: "success", plan });
+    } catch {
+      setPlanning({ status: "error" });
+    } finally {
+      submitting.current = false;
+    }
   }
 
   return (
@@ -50,6 +75,14 @@ export function DashboardScreen() {
             value={dailyContext}
             onChangeText={setDailyContext}
             onSubmit={handlePlanMyDay}
+            isSubmitting={planning.status === "submitting"}
+            feedback={
+              planning.status === "error"
+                ? "We couldn't plan your day. Please try again."
+                : planning.status === "success"
+                  ? "Your daily plan is ready."
+                  : undefined
+            }
           />
           <CurrentFocusCard />
           <TopPrioritiesCard />
