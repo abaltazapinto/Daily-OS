@@ -9,15 +9,20 @@ type DailyContextInputCardProps = {
   value: string;
   onChangeText: (value: string) => void;
   onSubmit: () => void;
+  isSubmitting?: boolean;
+  feedback?: string;
 };
 
 export function DailyContextInputCard({
   value,
   onChangeText,
   onSubmit,
+  isSubmitting = false,
+  feedback,
 }: DailyContextInputCardProps) {
   const theme = useTheme();
   const isEmpty = value.trim().length === 0;
+  const isDisabled = isEmpty || isSubmitting;
 
   return (
     <ThemedView type="backgroundElement" style={styles.container}>
@@ -38,10 +43,10 @@ export function DailyContextInputCard({
       />
       <Pressable
         accessibilityRole="button"
-        accessibilityState={{ disabled: isEmpty }}
-        disabled={isEmpty}
+        accessibilityState={{ disabled: isDisabled, busy: isSubmitting }}
+        disabled={isDisabled}
         onPress={() => {
-          if (!isEmpty) onSubmit();
+          if (!isDisabled) onSubmit();
         }}
         style={({ pressed }) => [
           styles.button,
@@ -50,11 +55,18 @@ export function DailyContextInputCard({
               ? theme.backgroundSelected
               : theme.background,
           },
-          isEmpty && styles.disabled,
+          isDisabled && styles.disabled,
         ]}
       >
-        <ThemedText type="smallBold">Plan my day</ThemedText>
+        <ThemedText type="smallBold">
+          {isSubmitting ? "Planning your day…" : "Plan my day"}
+        </ThemedText>
       </Pressable>
+      {feedback && (
+        <ThemedText type="small" accessibilityLiveRegion="polite">
+          {feedback}
+        </ThemedText>
+      )}
     </ThemedView>
   );
 }
