@@ -3,13 +3,11 @@ import { StyleSheet, View } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Spacing } from "@/presentation/theme/theme";
+import type { TimeBlock } from "@/domain/planning/daily-plan";
 
-export type TimelineItem = {
-  id: string;
-  startTime: string;
-  endTime: string;
-  title: string;
-};
+// Static dashboard examples may omit an end time; generated blocks include it.
+export type TimelineItem = Pick<TimeBlock, "startTime" | "title"> &
+  Partial<Pick<TimeBlock, "endTime">>;
 
 type TimelineCardProps = {
   items: TimelineItem[];
@@ -23,9 +21,10 @@ export function TimelineCard({ items }: TimelineCardProps) {
       </ThemedText>
 
       <View style={styles.list}>
-        {items.map((item) => (
-          <ThemedText key={item.id}>
-            {item.startTime} - {item.endTime} {item.title}
+        {items.map((item, index) => (
+          <ThemedText key={index}>
+            {item.startTime}
+            {item.endTime ? ` - ${item.endTime}` : ""} {item.title}
           </ThemedText>
         ))}
       </View>
