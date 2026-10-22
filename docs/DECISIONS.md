@@ -1,0 +1,6 @@
+- OpenAI only server-side
+- DailyPlan provider-agnostic
+- Google Calendar behind an adapter
+- GitHub behind an adapter
+- planner consumes normalized context, not raw APIs
+- user confirms before calendar writes
