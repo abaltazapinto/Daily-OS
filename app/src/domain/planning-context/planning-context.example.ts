@@ -1,28 +1,41 @@
 import type { PlanningContext } from "./planning-context";
 
-// Static contract example, independent of providers and storage.
 export const planningContextExample = {
   timeZone: "Europe/Lisbon",
   recurringCommitments: [
     {
-      title: "Language class",
-      daysOfWeek: ["tuesday", "thursday"],
-      startTime: "18:00",
+      title: "ISEP",
+      daysOfWeek: ["monday", "tuesday", "wednesday", "thursday"],
+      startTime: "18:10",
       endTime: "19:00",
-      location: "Learning centre",
+      location: "ISEP",
     },
   ],
   routines: [
     {
-      title: "Reading",
-      daysOfWeek: ["monday", "wednesday", "friday"],
-      durationMinutes: 20,
-      preferredStartTime: "08:00",
+      title: "GYM",
+      daysOfWeek: ["monday", "tuesday", "wednesday", "thursday", "friday"],
+      durationMinutes: 60,
+      preferredStartTime: "12:00",
     },
   ],
-  travelTimes: [{ from: "Home", to: "Learning centre", durationMinutes: 15 }],
+  travelTimes: [
+    {
+      from: "Home",
+      to: "ISEP",
+      mode: "bike",
+      durationMinutes: 30,
+    },
+    {
+      from: "ISEP",
+      to: "Home",
+      mode: "bike",
+      durationMinutes: 20,
+    },
+  ],
   preferences: {
     preferredFocusDurationMinutes: 50,
     breakDurationMinutes: 10,
+    defaultTransitionBufferMinutes: 10,
   },
 } satisfies PlanningContext;
