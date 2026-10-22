@@ -1,5 +1,5 @@
 import { OpenAIDailyPlanner } from "@/services/planning/openai-daily-planner";
-import type { DailyPlanningInput } from "@/application/planning/daily-planning-input";
+import { dailyPlanningInputSchema } from "@/services/planning/daily-planning-input-schema";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -10,16 +10,21 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  if (!isDailyPlanningInput(body)) {
+  const input = dailyPlanningInputSchema.safeParse(body);
+
+  if (!input.success) {
     return Response.json(
-      { error: "A non-empty planning context is required." },
+      {
+        error:
+          "Non-empty context text, a valid planningDate (YYYY-MM-DD), and planningContext are required.",
+      },
       { status: 400 },
     );
   }
 
   try {
     const planner = new OpenAIDailyPlanner();
-    const plan = await planner.plan(body);
+    const plan = await planner.plan(input.data);
 
     return Response.json(plan);
   } catch {
@@ -28,14 +33,4 @@ export async function POST(request: Request) {
       { status: 503 },
     );
   }
-}
-
-function isDailyPlanningInput(value: unknown): value is DailyPlanningInput {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-
-  const input = value as Record<string, unknown>;
-
-  return typeof input.context === "string" && input.context.trim().length > 0;
 }

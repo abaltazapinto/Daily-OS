@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-import type { PlanningContext } from "../../domain/planning-context/planning-context";
+import type { PlanningContext } from "../domain/planning-context/planning-context";
 
 const timeSchema = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 const durationSchema = z.number().positive();
