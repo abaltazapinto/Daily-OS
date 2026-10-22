@@ -1,7 +1,9 @@
+import { Link } from "expo-router";
 import { useRef, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import type { DailyPlanner } from "@/application/planning/daily-planner";
 import { planDay } from "@/application/planning/plan-day";
@@ -79,6 +81,12 @@ export function DashboardScreen() {
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.content}>
           <GreetingCard />
+          <Link
+            href="./planning-context"
+            accessibilityLabel="Edit planning context"
+          >
+            <ThemedText type="linkPrimary">Edit planning context</ThemedText>
+          </Link>
           <DailyContextInputCard
             value={dailyContext}
             onChangeText={setDailyContext}
