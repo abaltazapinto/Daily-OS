@@ -6,6 +6,7 @@ import { planningContextSchema } from "../../infrastructure/planning-context-sch
 export const dailyPlanningInputSchema: z.ZodType<DailyPlanningInput> = z.object(
   {
     context: z.string().refine((text) => text.trim().length > 0),
+    planningDate: z.iso.date(),
     planningContext: planningContextSchema,
   },
 );

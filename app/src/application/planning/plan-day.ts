@@ -9,6 +9,16 @@ export async function planDay(
   planner: DailyPlanner,
 ): Promise<DailyPlan> {
   const planningContext = await contextProvider.load();
-  const input: DailyPlanningInput = { context, planningContext };
+  const parts = new Intl.DateTimeFormat("en", {
+    timeZone: planningContext.timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const dateParts = Object.fromEntries(
+    parts.map(({ type, value }) => [type, value]),
+  );
+  const planningDate = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+  const input: DailyPlanningInput = { context, planningDate, planningContext };
   return planner.plan(input);
 }

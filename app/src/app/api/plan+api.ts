@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         error:
-          "Non-empty context text and a valid planningContext are required.",
+          "Non-empty context text, a valid planningDate (YYYY-MM-DD), and planningContext are required.",
       },
       { status: 400 },
     );

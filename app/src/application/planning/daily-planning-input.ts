@@ -2,5 +2,7 @@ import type { PlanningContext } from "../../domain/planning-context/planning-con
 
 export type DailyPlanningInput = {
   context: string;
+  // Calendar date (YYYY-MM-DD) in planningContext.timeZone.
+  planningDate: string;
   planningContext: PlanningContext;
 };

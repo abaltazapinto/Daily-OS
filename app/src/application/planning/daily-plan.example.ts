@@ -9,6 +9,7 @@ export const dailyPlanningInputExample = {
     "I want to work on Daily OS for 60 minutes, solve a LeetCode problem for " +
     "30 minutes, and study engineering for 90 minutes. Leave a 30-minute " +
     "break before physiotherapy; postpone engineering if it will not fit.",
+  planningDate: "2026-10-22",
   planningContext: createEmptyPlanningContext("UTC"),
 } satisfies DailyPlanningInput;
 
