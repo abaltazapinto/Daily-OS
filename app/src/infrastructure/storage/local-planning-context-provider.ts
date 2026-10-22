@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createEmptyPlanningContext } from "../../application/planning-context/create-empty-planning-context";
 import type { PlanningContextProvider } from "../../application/planning-context/planning-context-provider";
 import type { PlanningContext } from "../../domain/planning-context/planning-context";
-import { planningContextSchema } from "./planning-context-schema";
+import { planningContextSchema } from "../planning-context-schema";
 
 const storageKey = "daily-os:planning-context:v1";
 

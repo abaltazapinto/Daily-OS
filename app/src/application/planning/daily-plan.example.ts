@@ -1,3 +1,4 @@
+import { createEmptyPlanningContext } from "../planning-context/create-empty-planning-context";
 import type { DailyPlan } from "../../domain/planning/daily-plan";
 import type { DailyPlanningInput } from "./daily-planning-input";
 
@@ -8,6 +9,7 @@ export const dailyPlanningInputExample = {
     "I want to work on Daily OS for 60 minutes, solve a LeetCode problem for " +
     "30 minutes, and study engineering for 90 minutes. Leave a 30-minute " +
     "break before physiotherapy; postpone engineering if it will not fit.",
+  planningContext: createEmptyPlanningContext("UTC"),
 } satisfies DailyPlanningInput;
 
 export const dailyPlanExample = {

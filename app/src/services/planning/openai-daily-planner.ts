@@ -27,7 +27,7 @@ export class OpenAIDailyPlanner implements DailyPlanner {
     const response = await this.client.responses.parse({
       model: "gpt-5.6-luna",
       instructions: DAILY_OS_PLANNER_INSTRUCTIONS,
-      input: input.context,
+      input: JSON.stringify(input),
       text: {
         format: zodTextFormat(dailyPlanSchema, "daily_plan"),
       },

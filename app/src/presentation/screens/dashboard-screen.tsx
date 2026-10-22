@@ -4,7 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedView } from "@/components/themed-view";
 import type { DailyPlanner } from "@/application/planning/daily-planner";
-import type { DailyPlanningInput } from "@/application/planning/daily-planning-input";
+import { planDay } from "@/application/planning/plan-day";
+import type { PlanningContextProvider } from "@/application/planning-context/planning-context-provider";
+import { LocalPlanningContextProvider } from "@/infrastructure/storage/local-planning-context-provider";
 import type { DailyPlan } from "@/domain/planning/daily-plan";
 import { HttpDailyPlanner } from "@/services/planning/http-daily-planner";
 import { CurrentFocusCard } from "@/presentation/components/dashboard/current-focus-card";
@@ -44,6 +46,8 @@ type PlanningState =
   | { status: "success"; plan: DailyPlan };
 
 const dailyPlanner: DailyPlanner = new HttpDailyPlanner();
+const planningContextProvider: PlanningContextProvider =
+  new LocalPlanningContextProvider();
 
 export function DashboardScreen() {
   const [dailyContext, setDailyContext] = useState("");
@@ -53,12 +57,15 @@ export function DashboardScreen() {
   async function handlePlanMyDay() {
     if (submitting.current || dailyContext.trim().length === 0) return;
 
-    const input: DailyPlanningInput = { context: dailyContext };
     submitting.current = true;
     setPlanning((previous) => ({ status: "submitting", plan: previous.plan }));
 
     try {
-      const plan = await dailyPlanner.plan(input);
+      const plan = await planDay(
+        dailyContext,
+        planningContextProvider,
+        dailyPlanner,
+      );
       setPlanning({ status: "success", plan });
     } catch {
       setPlanning((previous) => ({ status: "error", plan: previous.plan }));
